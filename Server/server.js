@@ -35,6 +35,12 @@ app.post('/api/exams',  [
   }
 });
 
+app.get('/api/client', (req, res) => {
+  Dao.listSelection()
+    .then(type => res.json(type))
+    .catch(() => res.status(500).end());
+});
+
 
 // Activate the server
 app.listen(port, () => {

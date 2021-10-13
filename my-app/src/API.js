@@ -5,9 +5,23 @@
  
  const BASEURL = '/api';
  
- function selectType(e) {
-    // call: POST /api
-    return new Promise((resolve, reject) => {
+ async function getSelectedType(){
+  const url = '/api/client';
+  const response = await fetch(url);
+  const responseBody = await response.json();
+  if (response.ok){
+        return responseBody;
+  } 
+  else {
+        throw responseBody;
+  }
+}
+    
+    
+    
+    
+    
+  /*  return new Promise((resolve, reject) => {
       fetch(BASEURL , {
         method: 'POST',
         headers: {
@@ -25,6 +39,10 @@
           }
       }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
     });
-  }
-  const API = {selectType};
+  }*/
+
+
+
+
+  const API = {getSelectedType};
 export default API;
