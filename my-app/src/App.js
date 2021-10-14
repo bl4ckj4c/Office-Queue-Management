@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react'
 import Select from 'react-select'
 import axios from 'axios'
