@@ -17,7 +17,11 @@
   }
 }
     
-    
+    async function getTicket(serviceType){
+
+      console.log("JSON{"+serviceType+"}");
+      
+    }
     
     
     
@@ -44,5 +48,5 @@
 
 
 
-  const API = {getSelectedType};
+  const API = {getSelectedType, getTicket};
 export default API;
