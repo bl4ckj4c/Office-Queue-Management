@@ -20,13 +20,13 @@ const db = require('./db');
 
 exports.listSelection = () => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM course';
+    const sql = 'SELECT serviceType, date FROM Service';
     db.all(sql, [], (err, rows) => {
       if (err) {
         reject(err);
         return;
       }
-      const types = rows.map((type) => ({ code: type.code, name: type.name, CFU: type.CFU }));
+      const types = rows.map((type) => ({ serviceType: type.serviceType, date: type.date }));
       resolve(types);
     });
   });
