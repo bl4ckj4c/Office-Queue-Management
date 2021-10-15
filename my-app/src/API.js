@@ -21,25 +21,25 @@ let i = 12
 async function getTicket(serviceType){
   
   //JSON sent to backend
-  console.log(JSON.stringify({typeOfRequest: "customer", ID: "", serviceType: serviceType, startDate: "", endDate: ""}));
-  return new Promise((resolve, reject) => {
-    fetch(BASEURL , {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({typeOfRequest: "customer", ID: "", serviceType: serviceType, startDate: "", endDate: ""}),
-      }).then((response) => {
-        if (response.ok) {
-          console.log(response.json()); //response: JSON with ticket number 
-        } else {
-          // analyze the cause of error
-          response.json()
-            .then((message) => { reject(message); }) // error message in the response body
-            .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
-        }
-    }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
-  });
+  // console.log(JSON.stringify({typeOfRequest: "customer", ID: "", serviceType: serviceType, startDate: "", endDate: ""}));
+  // return new Promise((resolve, reject) => {
+  //   fetch(BASEURL , {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({typeOfRequest: "customer", ID: "", serviceType: serviceType, startDate: "", endDate: ""}),
+  //     }).then((response) => {
+  //       if (response.ok) {
+  //         //console.log(response.json()); //response: JSON with ticket number 
+  //       } else {
+  //         // analyze the cause of error
+  //         response.json()
+  //           .then((message) => { reject(message); }) // error message in the response body
+  //           .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+  //       }
+  //   }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
+  // });
   return ++i;
   
 }
@@ -50,7 +50,7 @@ async function getNextCustomer(counterID){
   console.log(JSON.stringify({typeOfRequest: "officer", ID: counterID, serviceType: "", startDate: "", endDate: ""}));
   return new Promise((resolve, reject) => {
     fetch(BASEURL , {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -68,12 +68,12 @@ async function getNextCustomer(counterID){
   });
 }
     
-async function getStatisticsForCounter(startDate, endDate, counterID){
+async function getStatisticsForCounter(startDate, endDate, counterID){ //counterID can be null if manager asks for all counters
   //JSON sent to backend
   console.log(JSON.stringify({typeOfRequest: "manager", ID: counterID, serviceType: "", startDate: startDate, endDate: endDate}));
   return new Promise((resolve, reject) => {
     fetch(BASEURL , {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -91,12 +91,12 @@ async function getStatisticsForCounter(startDate, endDate, counterID){
   });
 }
 
-async function getStatisticsForServicetype(startDate, endDate, serviceType){
+async function getStatisticsForServicetype(startDate, endDate, serviceType){ //counterID can be null if manager asks for all services
   //JSON sent to backend
   console.log(JSON.stringify({typeOfRequest: "manager", ID: "", serviceType: serviceType, startDate: startDate, endDate: endDate}));
   return new Promise((resolve, reject) => {
     fetch(BASEURL , {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
