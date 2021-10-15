@@ -16,14 +16,15 @@
         throw responseBody;
   }
 }
+let i = 12
     
-    async function getTicket(serviceType){
+async function getTicket(serviceType){
 
-      console.log("JSON{"+serviceType+"}");
-      
-    }
-    
-    
+  console.log("JSON{"+serviceType+"}");
+  return ++i;
+  
+}
+
     
   /*  return new Promise((resolve, reject) => {
       fetch(BASEURL , {

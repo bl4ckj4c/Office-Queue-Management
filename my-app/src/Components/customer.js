@@ -1,5 +1,7 @@
 import { Col, Row, Container } from 'react-bootstrap';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Modal } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+
 import API from '../API.js';
 import "./customer.css";
 import icon1 from './icons/1.jpg';
@@ -9,22 +11,42 @@ import icon4 from './icons/4.jpg';
 
 function Customer(props) {
 
-    function handleClick(serviceType) {
-        API.getTicket(serviceType);
-    }
+    const [ticketNum, setTicketNum] = useState(-1);
+    const [selectedService, setSelectedService] = useState(null); 
+    const [modalShow, setModalShow] = useState(false);
+    const closeModal = () => setModalShow(false);
+  
 
+
+  useEffect(() => {
+    const getTicket = async () => {
+      const ticket = await API.getTicket(selectedService);
+	  setTicketNum(ticket);
+      setModalShow(true);
+
+    };
+
+
+	if(selectedService){
+	getTicket();
+	setSelectedService(null);
+	}
+	
+
+  }, [selectedService]);
+  
     return (
         <Container>
+            <ShowTicketModal show={modalShow} handleClose={()=>setModalShow(false)} message={ticketNum}/>
 
             <Row className="justify-content-center mt-3 text">GET YOUR TICKET</Row>
-
             <Row className="justify-content-center mt-3">
                 <Col xs lg="4">
                     <Card>
                         <Card.Img variant="top" src={icon1} />
                         <Card.Body>
                             <Card.Title>SERVICE 1</Card.Title>
-                            <Button variant="primary" onClick={() => handleClick("service1")}>Add me to queue</Button>
+                            <Button variant="primary" onClick={() => setSelectedService(1)}>Add me to queue</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -34,7 +56,7 @@ function Customer(props) {
                         <Card.Img variant="top" src={icon2} />
                         <Card.Body>
                             <Card.Title>SERVICE 2</Card.Title>
-                            <Button variant="primary" onClick={() => handleClick("service2")}>Add me to queue</Button>
+                            <Button variant="primary" onClick={() => setSelectedService(2)}>Add me to queue</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -45,7 +67,7 @@ function Customer(props) {
                         <Card.Img variant="top" src={icon3}/>
                         <Card.Body>
                             <Card.Title>SERVICE 3</Card.Title>
-                            <Button variant="primary" onClick={() => handleClick("service3")}>Add me to queue</Button>
+                            <Button variant="primary" onClick={() => setSelectedService(3)}>Add me to queue</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -54,7 +76,7 @@ function Customer(props) {
                         <Card.Img variant="top" src={icon4}/>
                         <Card.Body>
                             <Card.Title>SERVICE 4</Card.Title>
-                            <Button variant="primary" onClick={() => handleClick("service4")}>Add me to queue</Button>
+                            <Button variant="primary" onClick={() => setSelectedService(4)}>Add me to queue</Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -63,6 +85,25 @@ function Customer(props) {
 
     );
 };
+
+function ShowTicketModal(props) {
+
+    return (
+      <Modal
+        show={props.show}
+        onHide={props.handleClose}
+        size="md"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered>
+        <Modal.Header className="text-center font-weight-bold" closeButton onClick={props.handleClose}>Dear customer, here's your ticket number: </Modal.Header>
+        <Modal.Body className="display-1 text-center font-weight-bold">{props.message}</Modal.Body>
+        
+
+      </Modal>
+    );
+  }
+  
+
 
 export default Customer;
 
