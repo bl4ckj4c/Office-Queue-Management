@@ -7,6 +7,7 @@ import axios from 'axios'
 import API from './API';
 import NavigationBar from './ManagerView';
 import Customer from './Components/customer.js';
+import ManagerView from './ManagerView';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
           </Route>
 
           <Route exact path="/andrea">
-            <Button>PaginaAndrea</Button>
+            <ManagerView/>
           </Route>
 
           <Route exact path="/bruno">
@@ -28,7 +29,7 @@ function App() {
           </Route>
 
           <Route exact path="/jacopo">
-            <Customer></Customer>
+            <Customer/>
           </Route>
 
         </Switch>
