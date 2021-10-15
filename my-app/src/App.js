@@ -7,6 +7,7 @@ import axios from 'axios'
 import API from './API';
 import NavigationBar from './ManagerView';
 import Customer from './Components/customer.js';
+import Officer from './Components/officer.js';
 
 function App() {
 
@@ -23,11 +24,11 @@ function App() {
             <Button>PaginaAndrea</Button>
           </Route>
 
-          <Route exact path="/bruno">
-            <Button>PaginaBruno</Button>
+          <Route exact path="/officer">
+            <Officer></Officer>
           </Route>
 
-          <Route exact path="/jacopo">
+          <Route exact path="/customer">
             <Customer></Customer>
           </Route>
 

@@ -28,6 +28,7 @@ function Customer(props) {
                         </Card.Body>
                     </Card>
                 </Col>
+
                 <Col xs lg="4">
                     <Card>
                         <Card.Img variant="top" src={icon2} />
@@ -38,7 +39,7 @@ function Customer(props) {
                     </Card>
                 </Col>
             </Row>
-            <Row className="justify-content-center mt-2 ml-2">
+            <Row className="justify-content-center mt-2 mb-2">
                 <Col xs lg="4">
                     <Card>
                         <Card.Img variant="top" src={icon3}/>
