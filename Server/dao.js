@@ -46,3 +46,23 @@ exports.addClient = (client) => {
     });
   });
 };
+
+// Get statistics about a specific counter
+exports.getStatisticsCounter = (counter, startDate, endDate, manager) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT COUNT(*)\n' +
+                'FROM Service \n' +
+                'WHERE counterId = ? AND DATE(date) BETWEEN ? AND ?' +
+                '   AND officeId IN (SELECT officeId \n' +
+                '                    FROM Manager\n' +
+                '                    WHERE managerId = ?)';
+    db.run(sql, [counter, startDate, endDate, 'M1'], function (err, row) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(row);
+    });
+  });
+};
+
