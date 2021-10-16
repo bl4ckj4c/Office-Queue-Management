@@ -42,6 +42,24 @@ app.get('/api/client', (req, res) => {
 });
 
 
+app.post('/api', 
+ async (req, res) => {
+
+  const client = {
+    serviceType: req.body.serviceType,
+    id: req.body.id,
+    date: req.body.date,
+  };
+
+  try {
+    await Dao.addClient(client);
+    res.status(201).end();
+  } catch(err) {
+    res.status(503).json({error: `Database error during the creation of exam ${client.id}.`});
+  }
+});
+
+
 // Activate the server
 app.listen(port, () => {
   console.log(`react-score-server listening at http://localhost:${port}`);
