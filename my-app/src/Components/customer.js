@@ -16,24 +16,21 @@ function Customer(props) {
     const [modalShow, setModalShow] = useState(false);
     const closeModal = () => setModalShow(false);
   
-
-
-  useEffect(() => {
-    const getTicket = async () => {
-      const ticket = await API.getTicket(selectedService);
-	  setTicketNum(ticket);
-      setModalShow(true);
-
-    };
+    useEffect(() => {
+      const getTicket = async () => {
+        const ticket = await API.getTicket(selectedService);
+        setTicketNum(ticket);
+        setModalShow(true);
+      };
 
 
 	if(selectedService){
-	getTicket();
-	setSelectedService(null);
+        getTicket();
+        setSelectedService(null);
 	}
 	
 
-  }, [selectedService]);
+    }, [selectedService]);
   
     return (
         <Container>
@@ -97,13 +94,10 @@ function ShowTicketModal(props) {
         centered>
         <Modal.Header className="text-center font-weight-bold" closeButton onClick={props.handleClose}>Dear customer, here's your ticket number: </Modal.Header>
         <Modal.Body className="display-1 text-center font-weight-bold">{props.message}</Modal.Body>
-        
-
       </Modal>
     );
-  }
+}
   
-
 
 export default Customer;
 

@@ -47,25 +47,34 @@ async function getTicket(serviceType){
 async function getNextCustomer(counterID){
 
   //JSON sent to backend
-  console.log(JSON.stringify({typeOfRequest: "officer", ID: counterID, serviceType: "", startDate: "", endDate: ""}));
-  return new Promise((resolve, reject) => {
-    fetch(BASEURL , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({typeOfRequest: "officer", ID: counterID, serviceType: "", startDate: "", endDate: ""}),
-      }).then((response) => {
-        if (response.ok) {
-          console.log(response.json()); //response: JSON with number and servicetype to be served
-        } else {
-          // analyze the cause of error
-          response.json()
-            .then((message) => { reject(message); }) // error message in the response body
-            .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
-        }
-    }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
-  });
+  // console.log(JSON.stringify({typeOfRequest: "officer", ID: counterID, serviceType: "", startDate: "", endDate: ""}));
+  // return new Promise((resolve, reject) => {
+  //   fetch(BASEURL , {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({typeOfRequest: "officer", ID: counterID, serviceType: "", startDate: "", endDate: ""}),
+  //     }).then((response) => {
+  //       if (response.ok) {
+  //         console.log(response.json()); //response: JSON with number and servicetype to be served
+  //       } else {
+  //         // analyze the cause of error
+  //         response.json()
+  //           .then((message) => { reject(message); }) // error message in the response body
+  //           .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+  //       }
+  //   }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
+  // });
+
+  const nextCustomer = [
+    {
+      ticketNumber: 13,
+      serviceType : "service 1"
+    }
+  ]
+  
+  return nextCustomer;
 }
     
 async function getStatisticsForCounter(startDate, endDate, counterID){ //counterID can be null if manager asks for all counters
@@ -104,11 +113,9 @@ async function getStatisticsForCounter(startDate, endDate, counterID){ //counter
       customerServed : 58
     }
 
-]
+  ]
 
-return numServ;
-
-
+  return numServ;
 }
 
 async function getStatisticsForServicetype(startDate, endDate, serviceType){ //counterID can be null if manager asks for all services
@@ -156,6 +163,5 @@ async function getStatisticsForServicetype(startDate, endDate, serviceType){ //c
 
 
 
-
-  const API = {getSelectedType, getTicket, getStatisticsForCounter};
+const API = {getSelectedType, getTicket, getStatisticsForCounter, getStatisticsForServicetype, getNextCustomer};
 export default API;
