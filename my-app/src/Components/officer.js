@@ -50,10 +50,10 @@ function Officer(props) {
 
         return (<>
             <Col>
-                Ticket num: {props.data ? props.data.map(t=>t.ticketNumber):""}
+                Ticket num: {props.data ? props.data.ticketNumber:""}
             </Col>
             <Col>
-                Service Type: {props.data ? props.data.map(t=>t.serviceType):""}
+                Service Type: {props.data ? props.data.serviceType:""}
             </Col>
         </>);
     }

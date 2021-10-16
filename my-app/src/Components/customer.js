@@ -93,7 +93,7 @@ function ShowTicketModal(props) {
         aria-labelledby="contained-modal-title-vcenter"
         centered>
         <Modal.Header className="text-center font-weight-bold" closeButton onClick={props.handleClose}>Dear customer, here's your ticket number: </Modal.Header>
-        <Modal.Body className="display-1 text-center font-weight-bold">{props.message}</Modal.Body>
+        <Modal.Body className="display-1 text-center font-weight-bold">{props.message.number}</Modal.Body>
       </Modal>
     );
 }
