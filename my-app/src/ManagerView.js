@@ -3,6 +3,7 @@ import { useState, useEffect} from 'react';
 import 'bootstrap-daterangepicker/daterangepicker.css'
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 import API from './API.js';
+import moment from 'moment';
 
 
 function ManagerView(){
@@ -35,6 +36,8 @@ function ManagerView(){
     // format() returns ISO format with timezone, otherwise add YYYY-MM-DDTHH:mm:ss
     };
 
+    const maxDate = moment();
+
     return (
     /*   <Navbar className="fixed-top" bg="info">
             <Navbar.Brand  >
@@ -48,7 +51,7 @@ function ManagerView(){
 
 
       <>
-        <DateRangePicker onApply={handleApply}>
+        <DateRangePicker onApply={handleApply} initialSettings={{ maxDate :{maxDate} }}>
         <input type="text" className="form-control" />
             </DateRangePicker>
             <Tables data={numServed} />
@@ -60,7 +63,6 @@ function ManagerView(){
 
 
 function Tables(props) {
-  //let i = 0
   return (<Table striped bordered hover>
     <thead>
       <tr>
