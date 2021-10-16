@@ -1,7 +1,10 @@
-import { Navbar, Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { Navbar, Button, Table } from 'react-bootstrap';
+import { useState, useEffect} from 'react';
 import 'bootstrap-daterangepicker/daterangepicker.css'
 import DateRangePicker from 'react-bootstrap-daterangepicker';
+import API from './API.js';
+
+
 
 
 
@@ -9,15 +12,36 @@ import DateRangePicker from 'react-bootstrap-daterangepicker';
 
 
 function ManagerView(){
-
   const [startD, setStartD] = useState(null);
   const [endD, setEndD] = useState(null);
+  const [numServed, setNumServed] = useState(null);
+  const [updateDate, setUpdateDate] = useState(false);
   
+
+
+  useEffect(() => {
+    const getServed = async () => {
+      const served = await API.getStatisticsForCounter(startD, endD, null);
+      setNumServed(served);
+    };
+
+
+	if(updateDate){
+    getServed();
+    setUpdateDate(false);
+	}
+	
+
+  }, [updateDate]);
+
+
+
   const handleApply = (event, picker) =>  {
       setStartD(picker.startDate.format());
       setEndD(picker.endDate.format());
       console.log("start "+picker.startDate.format());
       console.log("end "+picker.endDate.format("YYYY-MM-DD"));
+      setUpdateDate(true);
 
 // format() returns ISO format with timezone, otherwise add YYYY-MM-DDTHH:mm:ss
   };
@@ -32,13 +56,47 @@ function ManagerView(){
       <span className="text-white" > Administration statistics </span>
     </Navbar.Brand>
   </Navbar> */
+
+
+<>
   <DateRangePicker onApply={handleApply}>
   <input type="text" className="form-control" />
       </DateRangePicker>
+      <Tables data={numServed} />
+     </>
   )
 
   //see if it's possible to limit the date range (maxDate), usage of Date()?
 }
+
+
+function Tables(props) {
+
+/* 
+ 
+ */
+
+  let i = 0
+  return (<Table striped bordered hover>
+    <thead>
+      <tr>
+        <th>CounterID</th>
+        <th>number of costumers served </th>
+      </tr>
+    </thead>
+    <tbody>
+    {props.data ? props.data.map(t =>
+     <><tr>
+        <td>{t.counterId}</td>
+        <td>{t.customerServed}</td>
+      </tr>
+      </>
+): "" };
+    </tbody>
+  </Table>
+  );
+}
+
 
 
 
