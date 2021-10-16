@@ -32,3 +32,17 @@ exports.listSelection = () => {
   });
 };
 
+
+// add new client
+exports.addClient = (client) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'INSERT INTO Client(clientId, officeId, serviceId) VALUES(?, ?, ?)';
+    db.run(sql, [client.id,10, client.id ], function (err) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(this.lastID);
+    });
+  });
+};
