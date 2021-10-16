@@ -6,7 +6,7 @@ import { Button, DropdownButton, Dropdown } from 'react-bootstrap'
 import axios from 'axios'
 import API from './API';
 import NavigationBar from './ManagerView';
-import Customer from './Components/customer.js';
+import Customer from './Components/Customer.js';
 import Officer from './Components/officer.js';
 import ManagerView from './ManagerView';
 
