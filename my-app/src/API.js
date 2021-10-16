@@ -69,7 +69,7 @@ async function getNextCustomer(counterID){
     
 async function getStatisticsForCounter(startDate, endDate, counterID){ //counterID can be null if manager asks for all counters
   //JSON sent to backend
-  console.log(JSON.stringify({typeOfRequest: "manager", ID: counterID, serviceType: "", startDate: startDate, endDate: endDate}));
+/*   console.log(JSON.stringify({typeOfRequest: "manager", ID: counterID, serviceType: "", startDate: startDate, endDate: endDate}));
   return new Promise((resolve, reject) => {
     fetch(BASEURL , {
       method: 'POST',
@@ -88,6 +88,26 @@ async function getStatisticsForCounter(startDate, endDate, counterID){ //counter
         }
     }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
   });
+ */
+  const numServ = [
+    {
+      counterId: "counter1",
+      customerServed : 18
+    },
+    {
+      counterId: "counter8",
+      customerServed : 13
+    },
+    {
+      counterId: "counter2",
+      customerServed : 58
+    }
+
+]
+
+return numServ;
+
+
 }
 
 async function getStatisticsForServicetype(startDate, endDate, serviceType){ //counterID can be null if manager asks for all services
@@ -136,5 +156,5 @@ async function getStatisticsForServicetype(startDate, endDate, serviceType){ //c
 
 
 
-  const API = {getSelectedType, getTicket};
+  const API = {getSelectedType, getTicket, getStatisticsForCounter};
 export default API;
