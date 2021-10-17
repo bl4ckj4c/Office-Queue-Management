@@ -36,7 +36,7 @@ function Customer(props) {
         <Container>
             <ShowTicketModal show={modalShow} handleClose={()=>setModalShow(false)} message={ticketNum}/>
 
-            <Row className="justify-content-center mt-3 text">GET YOUR TICKET</Row>
+            <Row className="justify-content-center mt-3">GET YOUR TICKET</Row>
             <Row className="justify-content-center mt-3">
                 <Col xs lg="4">
                     <Card>

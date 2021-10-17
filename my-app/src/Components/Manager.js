@@ -2,11 +2,11 @@ import { Navbar, Button, Table } from 'react-bootstrap';
 import { useState, useEffect} from 'react';
 import 'bootstrap-daterangepicker/daterangepicker.css'
 import DateRangePicker from 'react-bootstrap-daterangepicker';
-import API from './API.js';
+import API from '../API.js';
 import moment from 'moment';
 
 
-function ManagerView(){
+function Manager(){
     const [startD, setStartD] = useState(null);
     const [endD, setEndD] = useState(null);
     const [numServed, setNumServed] = useState(null);
@@ -78,13 +78,10 @@ function Tables(props) {
             <td>{t.customerServed}</td>
           </tr>
         </>
-      ): ""};
+      ): ""}
     </tbody>
   </Table>
   );
 }
 
-
-
-
-export default ManagerView;
+export default Manager;
