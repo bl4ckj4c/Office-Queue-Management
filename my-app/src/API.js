@@ -1,62 +1,62 @@
 /**
  * All the API calls
  */
- import dayjs from 'dayjs';
-const a=dayjs();
- 
- const BASEURL = '/api';
- 
- async function getSelectedType(){
+import dayjs from 'dayjs';
+const a = dayjs();
+
+const BASEURL = '/api';
+
+async function getSelectedType() {
   const url = '/api/client';
   const response = await fetch(url);
   const responseBody = await response.json();
-  if (response.ok){
-        return responseBody;
-  } 
+  if (response.ok) {
+    return responseBody;
+  }
   else {
-        throw responseBody;
+    throw responseBody;
   }
 }
 let i = 0
-    
-async function getTicket(serviceType){
-  
+
+async function getTicket(serviceType) {
+
   //JSON sent to backend
   // console.log(JSON.stringify({typeOfRequest: "customer", ID: "", serviceType: serviceType, startDate: "", endDate: ""}));
-/*
-   return new Promise((resolve, reject) => {
-     fetch(BASEURL , {
-       method: 'POST',
-       headers: {
-        'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({typeOfRequest: "customer", id:serviceType, servicedType: serviceType, startDate:a }),
-       }).then((response) => {
-         if (response.ok) {
-           resolve(10);//console.log(response.json()); //response: JSON with ticket number 
-         } else {
-           // analyze the cause of error
-           response.json()
-             .then((message) => { reject(message); }) // error message in the response body
-             .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
-        }
-     }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
-  });
-*/
+  /*
+     return new Promise((resolve, reject) => {
+       fetch(BASEURL , {
+         method: 'POST',
+         headers: {
+          'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({typeOfRequest: "customer", id:serviceType, servicedType: serviceType, startDate:a }),
+         }).then((response) => {
+           if (response.ok) {
+             resolve(10);//console.log(response.json()); //response: JSON with ticket number 
+           } else {
+             // analyze the cause of error
+             response.json()
+               .then((message) => { reject(message); }) // error message in the response body
+               .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+          }
+       }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
+    });
+  */
   //JSON format expected
-  const ticketNumber = 
-    {
-      number : 15,
-      serviceType : "service3",
-      estimatedWaitingTime : -1
-    }
-  
+  const ticketNumber =
+  {
+    number: 15,
+    serviceType: "service3",
+    estimatedWaitingTime: -1
+  }
+
 
   return ticketNumber;
 
 }
 
-async function getNextCustomer(counterID){
+async function getNextCustomer(counterID) {
 
   //JSON sent to backend
   // console.log(JSON.stringify({typeOfRequest: "officer", ID: counterID, serviceType: "", startDate: dayjs.format("DD MM AAAA"), endDate: ""}));
@@ -80,52 +80,55 @@ async function getNextCustomer(counterID){
   // });
 
   //JSON format expexted
-  const nextCustomer = 
-    {
-      ticketNumber : 13,
-      serviceType : "service1"
-    }
-  
+  const nextCustomer =
+  {
+    ticketNumber: 13,
+    serviceType: "service1"
+  }
+
 
   return nextCustomer;
 }
-    
-async function getStatisticsForCounter(startDate, endDate, counterID){ //counterID can be null if manager asks for all counters
+
+async function getStatisticsForCounter(startDate, endDate, counterID) { //counterID can be null if manager asks for all counters
   //JSON sent to backend
-/*   console.log(JSON.stringify({typeOfRequest: "manager", ID: counterID, serviceType: "", startDate: startDate, endDate: endDate}));
-  return new Promise((resolve, reject) => {
-    fetch(BASEURL , {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({typeOfRequest: "manager", ID: counterID, serviceType: "", startDate: startDate, endDate: endDate}),
-      }).then((response) => {
-        if (response.ok) {
-          console.log(response.json()); //response: JSON with query results
-        } else {
-          // analyze the cause of error
-          response.json()
-            .then((message) => { reject(message); }) // error message in the response body
-            .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
-        }
-    }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
-  });
- */
+  /*   console.log(JSON.stringify({typeOfRequest: "manager", ID: counterID, serviceType: "", startDate: startDate, endDate: endDate}));
+    return new Promise((resolve, reject) => {
+      fetch(BASEURL , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({typeOfRequest: "manager", ID: counterID, serviceType: "", startDate: startDate, endDate: endDate}),
+        }).then((response) => {
+          if (response.ok) {
+            console.log(response.json()); //response: JSON with query results
+          } else {
+            // analyze the cause of error
+            response.json()
+              .then((message) => { reject(message); }) // error message in the response body
+              .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+          }
+      }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
+    });
+   */
 
   //JSON format expexted
   const numServ = [
     {
       counterId: "counter1",
-      customerServed : 18
+      serviceType: "s1",
+      customerServed: 18
     },
     {
       counterId: "counter8",
-      customerServed : 13
+      serviceType: "s1",
+      customerServed: 13
     },
     {
       counterId: "counter2",
-      customerServed : 58
+      serviceType: "s1",
+      customerServed: 58
     }
 
   ]
@@ -133,25 +136,80 @@ async function getStatisticsForCounter(startDate, endDate, counterID){ //counter
   return numServ;
 }
 
-async function getStatisticsForServicetype(startDate, endDate, serviceType){ //counterID can be null if manager asks for all services
+//TODO ANDREA
+async function getStatisticsForAllCounter(startDate, endDate) { //counterID can be null if manager asks for all counters
   //JSON sent to backend
-  console.log(JSON.stringify({typeOfRequest: "manager", ID: "", serviceType: serviceType, startDate: startDate, endDate: endDate}));
+  console.log(JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: "", startDate: startDate, endDate: endDate }));
   return new Promise((resolve, reject) => {
-    fetch(BASEURL , {
+    fetch(BASEURL + '/manager/all', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({typeOfRequest: "manager", ID: "", serviceType: serviceType, startDate: startDate, endDate: endDate}),
-      }).then((response) => {
-        if (response.ok) {
-          console.log(response.json()); //response: JSON with query results
-        } else {
-          // analyze the cause of error
-          response.json()
-            .then((message) => { reject(message); }) // error message in the response body
-            .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
-        }
+      body: JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: "", startDate: startDate, endDate: endDate }),
+    }).then((response) => {
+      if (response.ok) {
+        resolve(response.json())
+      } else {
+        // analyze the cause of error
+        response.json()
+          .then((message) => { reject(message); }) // error message in the response body
+          .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+      }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
+  });
+
+}
+
+
+//TODO ANDREA
+async function getStatisticsForServiceTypeNEW(startDate, endDate) { //counterID can be null if manager asks for all counters
+  //JSON sent to backend
+  console.log(JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: "", startDate: startDate, endDate: endDate }));
+  return new Promise((resolve, reject) => {
+    fetch(BASEURL + '/manager/servicetype', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: "", startDate: startDate, endDate: endDate }),
+    }).then((response) => {
+      if (response.ok) {
+        resolve(response.json())
+      } else {
+        // analyze the cause of error
+        response.json()
+          .then((message) => { reject(message); }) // error message in the response body
+          .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+      }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
+  });
+
+}
+
+
+
+
+
+async function getStatisticsForServicetype(startDate, endDate, serviceType) { //counterID can be null if manager asks for all services
+  //JSON sent to backend
+  console.log(JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: serviceType, startDate: startDate, endDate: endDate }));
+  return new Promise((resolve, reject) => {
+    fetch(BASEURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: serviceType, startDate: startDate, endDate: endDate }),
+    }).then((response) => {
+      if (response.ok) {
+        console.log(response.json()); //response: JSON with query results
+      } else {
+        // analyze the cause of error
+        response.json()
+          .then((message) => { reject(message); }) // error message in the response body
+          .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+      }
     }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
   });
 
@@ -183,27 +241,27 @@ async function getStatisticsForServicetype(startDate, endDate, serviceType){ //c
   */
 }
 
-  /*  return new Promise((resolve, reject) => {
-      fetch(BASEURL , {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({code: e.value, score: e.label, date: 0}),
-        }).then((response) => {
-          if (response.ok) {
-            resolve(null);
-          } else {
-            // analyze the cause of error
-            response.json()
-              .then((message) => { reject(message); }) // error message in the response body
-              .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
-          }
-      }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
-    });
-  }*/
+/*  return new Promise((resolve, reject) => {
+    fetch(BASEURL , {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({code: e.value, score: e.label, date: 0}),
+      }).then((response) => {
+        if (response.ok) {
+          resolve(null);
+        } else {
+          // analyze the cause of error
+          response.json()
+            .then((message) => { reject(message); }) // error message in the response body
+            .catch(() => { reject({ error: "Cannot parse server response." }) }); // something else
+        }
+    }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
+  });
+}*/
 
 
 
-const API = {getSelectedType, getTicket, getStatisticsForCounter, getStatisticsForServicetype, getNextCustomer};
+const API = { getSelectedType, getTicket, getStatisticsForCounter, getStatisticsForServicetype, getStatisticsForServiceTypeNEW, getNextCustomer, getStatisticsForAllCounter };
 export default API;

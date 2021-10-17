@@ -1,10 +1,10 @@
 'use strict';
 
-const {body, param, validationResult, sanitizeBody, sanitizeParam} = require('express-validator');
+const { body, param, validationResult, sanitizeBody, sanitizeParam } = require('express-validator');
 const express = require('express');
 const morgan = require('morgan'); // logging middleware
 const Dao = require('./dao');
-const {toJSON} = require("express-session/session/cookie"); // module for accessing the exams in the DB
+const { toJSON } = require("express-session/session/cookie"); // module for accessing the exams in the DB
 
 
 // init express
@@ -30,7 +30,7 @@ app.post('/api/exams', [], async (req, res) => {
         await Dao.selectType(selectedType, req.user.id);
         res.status(201).end();
     } catch (err) {
-        res.status(503).json({error: `Database error`});
+        res.status(503).json({ error: `Database error` });
     }
 });
 
@@ -44,7 +44,7 @@ app.get('/api/client', (req, res) => {
 app.post('/api/manager',
     body('typeOfRequest')
         // Check if the typeOfRequest parameter is not null
-        .exists({checkNull: true})
+        .exists({ checkNull: true })
         .bail()
         // Check if the typeOfRequest parameter is not empty
         .notEmpty()
@@ -57,22 +57,22 @@ app.post('/api/manager',
         }),
     body('ID')
         // Check if the ID parameter is not null
-        .exists({checkNull: true}),
+        .exists({ checkNull: true }),
     body('serviceType')
         // Check if the typeOfRequest parameter is not null
-        .exists({checkNull: true})
+        .exists({ checkNull: true })
         .bail()
         // Check if the typeOfRequest parameter is a string
         .isString(),
     body('startDate')
         // Check if the typeOfRequest parameter is not null
-        .exists({checkNull: true})
+        .exists({ checkNull: true })
         .bail()
         // Check if the typeOfRequest parameter is not empty
         .notEmpty(),
     body('endDate')
         // Check if the typeOfRequest parameter is not null
-        .exists({checkNull: true})
+        .exists({ checkNull: true })
         .bail()
         // Check if the typeOfRequest parameter is not empty
         .notEmpty(),
@@ -100,7 +100,7 @@ app.post('/api/manager',
             // Statistics about one counter
             if (jsonData.serviceType === "") {
                 let regex = new RegExp(/^[1-9]([0-9]*)?$/);
-                if(regex.test(jsonData.ID)) {
+                if (regex.test(jsonData.ID)) {
                     Dao.getStatisticsCounter(jsonData.ID, jsonData.startDate, jsonData.endDate)
                         .then(r => res.status(200).json(r))
                         .catch(() => res.status(500).end());
@@ -126,6 +126,34 @@ app.post('/api/manager',
         }
     });
 
+//TODO ANDREA
+app.post('/api/manager/all', async (req, res) => {
+
+    let jsonData = req.body;
+
+    // Statistics about one counter
+    if (jsonData.serviceType === "") {
+        await Dao.getStatisticsAllCounters(jsonData.startDate, jsonData.endDate, "M1")
+            .then(r => res.status(200).json(r))
+            .catch(() => res.status(500).end());
+    }
+}
+);
+
+//TODO ANDREA
+app.post('/api/manager/servicetype', async (req, res) => {
+
+    let jsonData = req.body;
+
+    // Statistics about one counter
+    if (jsonData.serviceType === "") {
+        await Dao.getStatisticsAllServices(jsonData.startDate, jsonData.endDate, "M1")
+            .then(r => res.status(200).json(r))
+            .catch(() => res.status(500).end());
+    }
+}
+);
+
 
 app.post('/api',
     async (req, res) => {
@@ -140,7 +168,7 @@ app.post('/api',
             await Dao.addClient(client);
             res.status(201).end();
         } catch (err) {
-            res.status(503).json({error: `Database error during the creation of exam ${client.id}.`});
+            res.status(503).json({ error: `Database error during the creation of exam ${client.id}.` });
         }
     });
 
