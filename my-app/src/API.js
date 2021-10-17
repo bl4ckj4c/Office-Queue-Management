@@ -137,7 +137,7 @@ async function getStatisticsForCounter(startDate, endDate, counterID) { //counte
 }
 
 //TODO ANDREA
-async function getStatisticsForAllCounter(startDate, endDate) { //counterID can be null if manager asks for all counters
+async function getStatisticsForAllCounter(startDate, endDate) { 
   //JSON sent to backend
   console.log(JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: "", startDate: startDate, endDate: endDate }));
   return new Promise((resolve, reject) => {
@@ -163,7 +163,7 @@ async function getStatisticsForAllCounter(startDate, endDate) { //counterID can 
 
 
 //TODO ANDREA
-async function getStatisticsForServiceTypeNEW(startDate, endDate) { //counterID can be null if manager asks for all counters
+async function getStatisticsForServiceTypeNEW(startDate, endDate) {
   //JSON sent to backend
   console.log(JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: "", startDate: startDate, endDate: endDate }));
   return new Promise((resolve, reject) => {
