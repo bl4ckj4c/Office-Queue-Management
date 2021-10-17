@@ -57,13 +57,7 @@ app.post('/api/manager',
         }),
     body('ID')
         // Check if the ID parameter is not null
-        .exists({checkNull: true})
-        .bail()
-        // Check if the ID parameter is a number
-        .custom((value, req) => {
-            let regex = new RegExp(/^[1-9]([0-9]*)?$/);
-            return regex.test(value);
-        }),
+        .exists({checkNull: true}),
     body('serviceType')
         // Check if the typeOfRequest parameter is not null
         .exists({checkNull: true})
@@ -104,10 +98,19 @@ app.post('/api/manager',
             let jsonData = req.body;
 
             // Statistics about one counter
-            if (jsonData.serviceType === "" && jsonData.ID !== "") {
-                Dao.getStatisticsCounter(jsonData.ID, jsonData.startDate, jsonData.endDate)
-                    .then(r => res.status(200).json(r))
-                    .catch(() => res.status(500).end());
+            if (jsonData.serviceType === "") {
+                let regex = new RegExp(/^[1-9]([0-9]*)?$/);
+                if(regex.test(jsonData.ID)) {
+                    Dao.getStatisticsCounter(jsonData.ID, jsonData.startDate, jsonData.endDate)
+                        .then(r => res.status(200).json(r))
+                        .catch(() => res.status(500).end());
+                }
+                else {
+                    res.status(400).json({
+                        info: "The server cannot process the request",
+                        errors: "The counter id is not a number"
+                    });
+                }
             }
             // Statistics about one service type
             else if (jsonData.ID === "" && jsonData.serviceType !== "") {

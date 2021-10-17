@@ -5,7 +5,11 @@ import json
 
 def TestSuiteBackend():
     suite = unittest.TestSuite()
-    suite.addTest(TestManager('test_GET_StatisticsForCounter'))
+    suite.addTest(TestManager('test_POST_StatisticsForCounter'))
+    suite.addTest(TestManager('test_POST_StatisticsForServiceType'))
+    suite.addTest(TestManager('test_POST_StatisticsError_1'))
+    suite.addTest(TestManager('test_POST_StatisticsError_2'))
+    suite.addTest(TestManager('test_POST_StatisticsError_3'))
     return suite
 
 
@@ -47,6 +51,7 @@ class TestClient(unittest.TestCase):
 
 class TestManager(unittest.TestCase):
 
+    # This is the json format to be passe dinto the body of the requests
     # {
     #   "typeOfRequest": "manager",
     #   "ID": counterID,
@@ -55,46 +60,109 @@ class TestManager(unittest.TestCase):
     #   "endDate": endDate
     # }
 
-    """ This function tests the GET request for the statistics about a counter"""
+    # This function tests the POST request for the statistics about a counter
+    def test_POST_StatisticsForCounter(self):
 
-    def test_GET_StatisticsForCounter(self):
-        try:
-            r = requests.get('http://localhost:3001/api/manager')
-            self.assertEqual(r.status_code, 200)
+        payload = {
+            "typeOfRequest": "manager",
+            "ID": 1,
+            "serviceType": "",
+            "startDate": "2021/05/21",
+            "endDate": "2021/05/25"
+        }
 
-            bodyJSON = r.json()
-            #bodyJSON = "{\"typeOfRequest\":\"manager\",\"ID\":1,\"serviceType\":\"\",\"startDate\":\"START\",\"endDate\":\"END\"}"
-            self.assertIsNotNone(bodyJSON)
+        # Request sent
+        r = requests.post(
+            'http://localhost:3001/api/manager',
+            json=payload
+            )
 
-            try:
-                jsonData = json.loads(bodyJSON)
+        # The response code should be 200
+        self.assertEqual(r.status_code, 200)
 
-                # Check the presence of each field in the JSON and if each of them is well-formed
+        print(r.text)
 
-                # Type of request
-                self.assertIn("typeOfRequest", jsonData)
-                self.assertEqual(type(jsonData["typeOfRequest"]), str)
+    # This function tests the POST request for the statistics about a service type
+    def test_POST_StatisticsForServiceType(self):
 
-                # ID
-                self.assertIn("ID", jsonData)
-                self.assertEqual(type(jsonData["ID"]), int)
+        payload = {
+            "typeOfRequest": "manager",
+            "ID": "",
+            "serviceType": "serviceType1",
+            "startDate": "2021/05/21",
+            "endDate": "2021/05/25"
+        }
 
-                # Service Type
-                self.assertIn("serviceType", jsonData)
-                self.assertEqual(type(jsonData["serviceType"]), str)
+        # Request sent
+        r = requests.post(
+            'http://localhost:3001/api/manager',
+            json=payload
+            )
 
-                # Start date
-                self.assertIn("startDate", jsonData)
-                self.assertEqual(type(jsonData["startDate"]), str)
+        # The response code should be 200
+        self.assertEqual(r.status_code, 200)
 
-                # End date
-                self.assertIn("endDate", jsonData)
-                self.assertEqual(type(jsonData["endDate"]), str)
+        print(r.text)
 
-            except:
-                self.fail()
-        except:
-            self.fail("Request not working, check if server is up and running")
+    # This function tests the POST request for the statistics about a counter
+    def test_POST_StatisticsError_1(self):
+
+        payload = {
+            "typeOfRequest": "manager",
+            "ID": "",
+            "serviceType": "",
+            "startDate": "2021/05/21",
+            "endDate": "2021/05/25"
+        }
+
+        # Request sent
+        r = requests.post(
+            'http://localhost:3001/api/manager',
+            json=payload
+            )
+
+        # The response code should be 400
+        self.assertEqual(r.status_code, 400)
+
+    # This function tests the POST request for the statistics about a counter
+    def test_POST_StatisticsError_2(self):
+
+        payload = {
+            "typeOfRequest": "manager",
+            "ID": 1,
+            "serviceType": "serviceType1",
+            "startDate": "2021/05/21",
+            "endDate": "2021/05/25"
+        }
+
+        # Request sent
+        r = requests.post(
+            'http://localhost:3001/api/manager',
+            json=payload
+            )
+
+        # The response code should be 400
+        self.assertEqual(r.status_code, 400)
+
+    # This function tests the POST request for the statistics about a counter
+    def test_POST_StatisticsError_3(self):
+
+        payload = {
+            "typeOfRequest": "wrongTypeOfRequest",
+            "ID": 1,
+            "serviceType": "serviceType1",
+            "startDate": "2021/05/21",
+            "endDate": "2021/05/25"
+        }
+
+        # Request sent
+        r = requests.post(
+            'http://localhost:3001/api/manager',
+            json=payload
+            )
+
+        # The response code should be 400
+        self.assertEqual(r.status_code, 400)
 
 
 if __name__ == '__main__':
