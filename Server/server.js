@@ -111,9 +111,14 @@ app.post('/api/manager',
             }
             // Statistics about one service type
             else if (jsonData.ID === "" && jsonData.serviceType !== "") {
-                //
+                Dao.getStatisticsServiceType(jsonData.serviceType, jsonData.startDate, jsonData.endDate)
+                    .then(r => res.status(200).json(r))
+                    .catch(() => res.status(500).end());
             } else {
-                //
+                res.status(400).json({
+                    info: "The server cannot process the request",
+                    errors: "Both counter id and service type were specified in the request"
+                });
             }
         }
     });
