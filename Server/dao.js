@@ -3,6 +3,7 @@
 
 const db = require('./db');
 
+var numclients = 15;
 
 // add a new selecttype
 /*exports.selectType = (e, userId) => {
@@ -47,6 +48,25 @@ exports.addClient = (client) => {
   });
 };
 
+
+//TODO BRUNO
+//get a ticket number for a new customer
+exports.getNewTicket = (serviceType) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'INSERT INTO Client(clientId, officeId, serviceId) VALUES(?, ?, ?)';
+    numclients++;
+    db.run(sql, [numclients, 42, serviceType], (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      const stats = {number: numclients, estimatedWaitingTime: -1};
+      resolve(stats);
+    });
+  });
+};
+
+
 //TODO ANDREA
 //get statistics about all counters per service type
 exports.getStatisticsAllCounters = (startDate, endDate, manager) => {
@@ -90,9 +110,6 @@ exports.getStatisticsAllServices = (startDate, endDate, manager) => {
     });
   });
 };
-
-
-
 
 
 // Get statistics about a specific counter

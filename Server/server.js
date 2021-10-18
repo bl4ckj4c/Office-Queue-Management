@@ -155,22 +155,33 @@ app.post('/api/manager/servicetype', async (req, res) => {
 );
 
 
-app.post('/api',
-    async (req, res) => {
+//TODO BRUNO
+app.post('/api/customer/newticket', async (req, res) => {
 
-        const client = {
-            serviceType: req.body.serviceType,
-            id: req.body.id,
-            date: req.body.date,
-        };
+    let jsonData = req.body;
 
-        try {
-            await Dao.addClient(client);
-            res.status(201).end();
-        } catch (err) {
-            res.status(503).json({ error: `Database error during the creation of exam ${client.id}.` });
-        }
-    });
+    await Dao.getNewTicket(jsonData.serviceType)
+        .then(r => res.status(200).json(r))
+        .catch(() => res.status(500).end());
+}
+);
+
+// app.post('/api',
+//     async (req, res) => {
+
+//         const client = {
+//             serviceType: req.body.serviceType,
+//             id: req.body.id,
+//             date: req.body.date,
+//         };
+
+//         try {
+//             await Dao.addClient(client);
+//             res.status(201).end();
+//         } catch (err) {
+//             res.status(503).json({ error: `Database error during the creation of exam ${client.id}.` });
+//         }
+//     });
 
 
 // Activate the server

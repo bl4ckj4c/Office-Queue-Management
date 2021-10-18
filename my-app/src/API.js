@@ -4,6 +4,8 @@
 import dayjs from 'dayjs';
 const a = dayjs();
 
+var numclients = 15;
+
 const BASEURL = '/api';
 
 async function getSelectedType() {
@@ -22,10 +24,10 @@ let i = 0
 async function getTicket(serviceType) {
 
   //JSON sent to backend
-  // console.log(JSON.stringify({typeOfRequest: "customer", ID: "", serviceType: serviceType, startDate: "", endDate: ""}));
-  /*
+  console.log(JSON.stringify({typeOfRequest: "customer", ID: "", serviceType: serviceType, startDate: "", endDate: ""}));
+  
      return new Promise((resolve, reject) => {
-       fetch(BASEURL , {
+       fetch(BASEURL + '/customer/newticket', {
          method: 'POST',
          headers: {
           'Content-Type': 'application/json',
@@ -33,7 +35,7 @@ async function getTicket(serviceType) {
          body: JSON.stringify({typeOfRequest: "customer", id:serviceType, servicedType: serviceType, startDate:a }),
          }).then((response) => {
            if (response.ok) {
-             resolve(10);//console.log(response.json()); //response: JSON with ticket number 
+             resolve(response.json());//console.log(response.json()); //response: JSON with ticket number 
            } else {
              // analyze the cause of error
              response.json()
@@ -42,17 +44,22 @@ async function getTicket(serviceType) {
           }
        }).catch(() => { reject({ error: "Cannot communicate with the server." }) }); // connection errors
     });
-  */
+  
   //JSON format expected
+  /*
+
   const ticketNumber =
   {
-    number: 15,
+    number: numclients,
     serviceType: "service3",
     estimatedWaitingTime: -1
   }
 
+  numclients++;
 
   return ticketNumber;
+
+  */
 
 }
 
