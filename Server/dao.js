@@ -4,7 +4,7 @@
 const db = require('./db');
 const dayjs = require("dayjs");
 
-let numclients = 15;
+let numclients = 55;
 
 // add a new selecttype
 /*exports.selectType = (e, userId) => {
@@ -56,15 +56,18 @@ exports.getNewTicket = (serviceType) => {
     const sql = 'INSERT INTO Client(clientId, officeId, serviceId) VALUES(?, ?, ?)';
 
     numclients++;
-    db.run(sql, [numclients, 42, serviceType], (err) => {
+    db.run(sql, [58, 42, serviceType], (err) => {
       if (err) {
+          console.log(err);
+          console.log(numclients);
         reject(err);
         return;
       }
 
-      const sql2 = 'INSERT INTO Service(serviceId, serviceType, date, officeId, counterId) VALUE(?, ?, ?, ?, ?)';
-      db.run(sql2, [parseInt(serviceType,10), "placeholder", dayjs.now().format("YYYY-MM-DD"), "O1", "counter1"], (err2) => {
+      const sql2 = 'INSERT INTO Service(serviceId, serviceType, date, officeId, counterId) VALUES(?, ?, ?, ?, ?)';
+      db.run(sql2, [parseInt(serviceType,10)+7, "placeholder", dayjs().format("YYYY-MM-DD"), "O1", "counter1"], (err2) => {
           if (err2) {
+                console.log(err2);
               reject(err2);
               return;
           }
