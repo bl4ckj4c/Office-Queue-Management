@@ -378,7 +378,7 @@ app.post('/api/customer/newticket',
         .isString()
         // Check if the typeOfRequest parameter is equal to "manager"
         .custom((value, req) => {
-            return value === "manager";
+            return value === "customer";
         }),
     body('serviceType')
         // Check if the serviceType parameter is not null
