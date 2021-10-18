@@ -43,7 +43,7 @@ function Customer(props) {
                         <Card.Img variant="top" src={icon1} />
                         <Card.Body>
                             <Card.Title>SERVICE 1</Card.Title>
-                            <Button variant="primary" onClick={() => setSelectedService(1)}>Add me to queue</Button>
+                            <Button variant="primary" onClick={() => setSelectedService('bill')}>Add me to queue</Button>
                         </Card.Body>
                     </Card>
                 </Col>

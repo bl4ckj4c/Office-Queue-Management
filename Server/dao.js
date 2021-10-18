@@ -47,6 +47,23 @@ exports.addClient = (client) => {
     });
 };
 
+//TODO BRUNO
+//get a ticket number for a new customer
+exports.getNewTicket = (serviceType) => {
+  return new Promise((resolve, reject) => {
+    const sql = 'INSERT INTO Client(clientId, officeId, serviceId) VALUES(?, ?, ?)';
+    numclients++;
+    db.run(sql, [numclients, 42, serviceType], (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      const stats = {number: numclients, estimatedWaitingTime: -1};
+      resolve(stats);
+    });
+  });
+};
+
 // *********************
 // *** MANAGER start ***
 // *********************
