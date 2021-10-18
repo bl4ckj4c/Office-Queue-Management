@@ -3,8 +3,10 @@
 
 const db = require('./db');
 const dayjs = require("dayjs");
+const {body, validationResult} = require("express-validator");
 
-let numclients = 55;
+let numclients = 1;
+let nextClientToBeServed = numclients;
 
 // add a new selecttype
 /*exports.selectType = (e, userId) => {
@@ -195,4 +197,21 @@ exports.getStatisticsServiceType = (serviceType, startDate, endDate, manager) =>
 
 // *******************
 // *** MANAGER end ***
+// *******************
+
+// *********************
+// *** OFFICER start ***
+// *********************
+
+exports.getNextClient = () => {
+    return new Promise((resolve, reject) => {
+        if(nextClientToBeServed == numclients)
+            resolve(0);
+        else
+            resolve(nextClientToBeServed++);
+    });
+};
+
+// *******************
+// *** OFFICER end ***
 // *******************

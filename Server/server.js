@@ -18,25 +18,6 @@ const port = 3001;
 app.use(morgan('dev'));
 app.use(express.json());
 
-
-// POST /api/exams
-app.post('/api/exams', [], async (req, res) => {
-
-
-    const selectedType = {
-        code: req.body.value,
-        score: req.body.label,
-        date: 0,
-    };
-
-    try {
-        await Dao.selectType(selectedType, req.user.id);
-        res.status(201).end();
-    } catch (err) {
-        res.status(503).json({error: `Database error`});
-    }
-});
-
 app.get('/api/client', (req, res) => {
     Dao.listSelection()
         .then(type => res.json(type))
@@ -365,7 +346,10 @@ app.post('/api/manager/servicetype',
 // *******************
 
 
-//TODO BRUNO
+// **********************
+// *** CUSTOMER start ***
+// **********************
+
 app.post('/api/customer/newticket',
     body('typeOfRequest')
         // Check if the typeOfRequest parameter is not null
@@ -376,7 +360,7 @@ app.post('/api/customer/newticket',
         .bail()
         // Check if the typeOfRequest parameter is a string
         .isString()
-        // Check if the typeOfRequest parameter is equal to "manager"
+        // Check if the typeOfRequest parameter is equal to "customer"
         .custom((value, req) => {
             return value === "customer";
         }),
@@ -411,25 +395,27 @@ app.post('/api/customer/newticket',
                 .then(r => res.status(200).json(r))
                 .catch(() => res.status(500).end());
         }
-}
+    }
 );
 
-// app.post('/api',
-//     async (req, res) => {
+// ********************
+// *** CUSTOMER end ***
+// ********************
 
-//         const client = {
-//             serviceType: req.body.serviceType,
-//             id: req.body.id,
-//             date: req.body.date,
-//         };
+// *********************
+// *** OFFICER start ***
+// *********************
 
-//         try {
-//             await Dao.addClient(client);
-//             res.status(201).end();
-//         } catch (err) {
-//             res.status(503).json({ error: `Database error during the creation of exam ${client.id}.` });
-//         }
-//     });
+app.get('/api/officer/nextclient', async (req, res) => {
+
+    await Dao.getNextClient()
+        .then(r => res.status(200).json(r))
+        .catch(() => res.status(500).end());
+});
+
+// *******************
+// *** OFFICER end ***
+// *******************
 
 
 // Activate the server
