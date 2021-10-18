@@ -141,7 +141,7 @@ async function getStatisticsForAllCounter(startDate, endDate) {
   //JSON sent to backend
   console.log(JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: "", startDate: startDate, endDate: endDate }));
   return new Promise((resolve, reject) => {
-    fetch(BASEURL + '/manager/all', {
+    fetch(BASEURL + '/manager/counters', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -167,7 +167,7 @@ async function getStatisticsForServiceTypeNEW(startDate, endDate) {
   //JSON sent to backend
   console.log(JSON.stringify({ typeOfRequest: "manager", ID: "", serviceType: "", startDate: startDate, endDate: endDate }));
   return new Promise((resolve, reject) => {
-    fetch(BASEURL + '/manager/servicetype', {
+    fetch(BASEURL + '/manager/servicetypes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
