@@ -62,8 +62,8 @@ exports.getNewTicket = (serviceType) => {
         return;
       }
 
-      const sql2 = 'INSERT INTO Service(serviceId, serviceType, date, officeId, counterId, clientId) VALUE(?, ?, ?, ?, ?, ?)';
-      db.run(sql2, [serviceType, "placeholder", dayjs.now().format("YYYY-MM-DD"), "O1", "counter1", numclients], (err2) => {
+      const sql2 = 'INSERT INTO Service(serviceId, serviceType, date, officeId, counterId) VALUE(?, ?, ?, ?, ?)';
+      db.run(sql2, [parseInt(serviceType,10), "placeholder", dayjs.now().format("YYYY-MM-DD"), "O1", "counter1"], (err2) => {
           if (err2) {
               reject(err2);
               return;

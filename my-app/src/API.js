@@ -32,7 +32,7 @@ async function getTicket(serviceType) {
          headers: {
           'Content-Type': 'application/json',
          },
-         body: JSON.stringify({typeOfRequest: "customer", id:serviceType, servicedType: serviceType, startDate:a }),
+         body: JSON.stringify({typeOfRequest: "customer", id:serviceType, serviceType: serviceType.toString(), startDate:a }),
          }).then((response) => {
            if (response.ok) {
              resolve(response.json());//console.log(response.json()); //response: JSON with ticket number 
