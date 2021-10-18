@@ -56,7 +56,7 @@ exports.getNewTicket = (serviceType) => {
     const sql = 'INSERT INTO Client(clientId, officeId, serviceId) VALUES(?, ?, ?)';
 
     numclients++;
-    db.run(sql, [58, 42, serviceType], (err) => {
+    db.run(sql, [numclients, 42, serviceType], (err) => {
       if (err) {
           console.log(err);
           console.log(numclients);
@@ -64,8 +64,27 @@ exports.getNewTicket = (serviceType) => {
         return;
       }
 
+      let serviceName;
+      switch (parseInt(serviceType,10)) {
+          case 1:
+              serviceName = "bill";
+              break;
+          case 2:
+              serviceName = "post";
+              break;
+          case 3:
+              serviceName = "box";
+              break;
+          case 4:
+              serviceName = "withdrawal";
+              break;
+          default:
+              serviceName = "generic";
+      }
+      console.log(serviceName);
+
       const sql2 = 'INSERT INTO Service(serviceId, serviceType, date, officeId, counterId) VALUES(?, ?, ?, ?, ?)';
-      db.run(sql2, [parseInt(serviceType,10)+7, "placeholder", dayjs().format("YYYY-MM-DD"), "O1", "counter1"], (err2) => {
+      db.run(sql2, [parseInt(serviceType,10), serviceName, dayjs().format("YYYY-MM-DD"), "O1", "counter1"], (err2) => {
           if (err2) {
                 console.log(err2);
               reject(err2);
