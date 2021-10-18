@@ -366,13 +366,51 @@ app.post('/api/manager/servicetype',
 
 
 //TODO BRUNO
-app.post('/api/customer/newticket', async (req, res) => {
+app.post('/api/customer/newticket',
+    body('typeOfRequest')
+        // Check if the typeOfRequest parameter is not null
+        .exists({checkNull: true})
+        .bail()
+        // Check if the typeOfRequest parameter is not empty
+        .notEmpty()
+        .bail()
+        // Check if the typeOfRequest parameter is a string
+        .isString()
+        // Check if the typeOfRequest parameter is equal to "manager"
+        .custom((value, req) => {
+            return value === "manager";
+        }),
+    body('serviceType')
+        // Check if the serviceType parameter is not null
+        .exists({checkNull: true})
+        .bail()
+        // Check if the serviceType parameter is a string
+        .isString(),
+    async (req, res) => {
 
-    let jsonData = req.body;
+        const result = validationResult(req);
+        // Validation error
+        if (!result.isEmpty()) {
+            let jsonArray = [];
+            for (let item of result.array())
+                jsonArray.push({
+                    param: item.param,
+                    error: item.msg,
+                    valueReceived: item.value
+                })
+            res.status(400).json({
+                info: "The server cannot process the request",
+                errors: jsonArray
+            });
+        }
+        // No error in validation
+        else {
+            let jsonData = req.body;
 
-    await Dao.getNewTicket(jsonData.serviceType)
-        .then(r => res.status(200).json(r))
-        .catch(() => res.status(500).end());
+            await Dao.getNewTicket(jsonData.serviceType)
+                .then(r => res.status(200).json(r))
+                .catch(() => res.status(500).end());
+        }
 }
 );
 
