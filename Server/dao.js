@@ -2,7 +2,9 @@
 /* Data Access Object (DAO) module for accessing courses and exams */
 
 const db = require('./db');
+const dayjs = require("dayjs");
 
+let numclients = 15;
 
 // add a new selecttype
 /*exports.selectType = (e, userId) => {
@@ -52,14 +54,24 @@ exports.addClient = (client) => {
 exports.getNewTicket = (serviceType) => {
   return new Promise((resolve, reject) => {
     const sql = 'INSERT INTO Client(clientId, officeId, serviceId) VALUES(?, ?, ?)';
+
     numclients++;
     db.run(sql, [numclients, 42, serviceType], (err) => {
       if (err) {
         reject(err);
         return;
       }
-      const stats = {number: numclients, estimatedWaitingTime: -1};
-      resolve(stats);
+
+      const sql2 = 'INSERT INTO Service(serviceId, serviceType, date, officeId, counterId, clientId) VALUE(?, ?, ?, ?, ?, ?)';
+      db.run(sql2, [serviceType, "placeholder", dayjs.now().format("YYYY-MM-DD"), "O1", "counter1", numclients], (err2) => {
+          if (err2) {
+              reject(err2);
+              return;
+          }
+
+          const stats = {number: numclients, estimatedWaitingTime: -1};
+          resolve(stats);
+      });
     });
   });
 };
