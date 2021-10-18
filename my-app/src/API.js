@@ -117,20 +117,6 @@ async function getStatisticsForCounter(startDate, endDate, counterID) { //counte
   const numServ = [
     {
       counterId: "counter1",
-<<<<<<< HEAD
-      serviceType: "service1",
-      customerServed : 18
-    },
-    {
-      counterId: "counter1",
-      serviceType: "service2",
-      customerServed : 13
-    },
-    {
-      counterId: "counter2",
-      serviceType: "service1",
-      customerServed : 58
-=======
       serviceType: "s1",
       customerServed: 18
     },
@@ -143,7 +129,6 @@ async function getStatisticsForCounter(startDate, endDate, counterID) { //counte
       counterId: "counter2",
       serviceType: "s1",
       customerServed: 58
->>>>>>> 408b1defa95ed143ea33efa1105135a4e072154a
     }
 
   ]
