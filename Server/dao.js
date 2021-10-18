@@ -205,7 +205,7 @@ exports.getStatisticsServiceType = (serviceType, startDate, endDate, manager) =>
 
 exports.getNextClient = () => {
     return new Promise((resolve, reject) => {
-        if(nextClientToBeServed == numclients)
+        if(nextClientToBeServed > numclients)
             resolve(0);
         else
             resolve(nextClientToBeServed++);

@@ -50,7 +50,7 @@ function Officer(props) {
 
         return (<>
             <Col>
-                Ticket num: {props.data ? props.data.ticketNumber:""}
+                Ticket num: {props.data ? ( props.data.ticketNumber === 0 ? "No customers to serve yet" : props.data.ticketNumber ) : ""}
             </Col>
             <Col>
                 Service Type: {props.data ? props.data.serviceType:""}
