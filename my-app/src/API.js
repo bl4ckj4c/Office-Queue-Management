@@ -117,14 +117,17 @@ async function getStatisticsForCounter(startDate, endDate, counterID){ //counter
   const numServ = [
     {
       counterId: "counter1",
+      serviceType: "service1",
       customerServed : 18
     },
     {
-      counterId: "counter8",
+      counterId: "counter1",
+      serviceType: "service2",
       customerServed : 13
     },
     {
       counterId: "counter2",
+      serviceType: "service1",
       customerServed : 58
     }
 
