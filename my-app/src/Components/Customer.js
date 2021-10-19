@@ -42,7 +42,7 @@ function Customer(props) {
                     <Card>
                         <Card.Img variant="top" src={icon1} />
                         <Card.Body>
-                            <Card.Title>SERVICE 1</Card.Title>
+                            <Card.Title>BILL</Card.Title>
                             <Button variant="primary" onClick={() => setSelectedService(1)}>Add me to queue</Button>
                         </Card.Body>
                     </Card>
@@ -52,7 +52,7 @@ function Customer(props) {
                     <Card>
                         <Card.Img variant="top" src={icon2} />
                         <Card.Body>
-                            <Card.Title>SERVICE 2</Card.Title>
+                            <Card.Title>POST</Card.Title>
                             <Button variant="primary" onClick={() => setSelectedService(2)}>Add me to queue</Button>
                         </Card.Body>
                     </Card>
@@ -63,7 +63,7 @@ function Customer(props) {
                     <Card>
                         <Card.Img variant="top" src={icon3}/>
                         <Card.Body>
-                            <Card.Title>SERVICE 3</Card.Title>
+                            <Card.Title>BOX</Card.Title>
                             <Button variant="primary" onClick={() => setSelectedService(3)}>Add me to queue</Button>
                         </Card.Body>
                     </Card>
@@ -72,7 +72,7 @@ function Customer(props) {
                     <Card>
                         <Card.Img variant="top" src={icon4}/>
                         <Card.Body>
-                            <Card.Title>SERVICE 4</Card.Title>
+                            <Card.Title>WITHDRAWAL</Card.Title>
                             <Button variant="primary" onClick={() => setSelectedService(4)}>Add me to queue</Button>
                         </Card.Body>
                     </Card>

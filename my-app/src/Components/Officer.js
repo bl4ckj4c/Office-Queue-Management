@@ -52,9 +52,9 @@ function Officer(props) {
             <Col>
                 Ticket num: {props.data ? ( props.data.ticketNumber === 0 ? "No customers to serve yet" : props.data.ticketNumber ) : ""}
             </Col>
-            <Col>
+            {/* <Col>
                 Service Type: {props.data ? props.data.serviceType:""}
-            </Col>
+            </Col> */}
         </>);
     }
 };
