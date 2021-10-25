@@ -44,7 +44,7 @@ sections:
 - Unit Testing:
   - Total hours estimated: 11 hours
   - Total hours spent: 10 hours
-  - Nr of automated unit test cases: 5 hours
+  - Nr of automated unit test cases: 5
   - Coverage (if available): not available
 - E2E testing:
   - Total hours estimated: 5 hours
