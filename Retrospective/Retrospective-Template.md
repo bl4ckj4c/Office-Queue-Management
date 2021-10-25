@@ -71,15 +71,21 @@ sections:
 ## ASSESSMENT
 
 - What caused your errors in estimation (if any)?
+We estimated a more hours for some tasks that we did't know very well (e.g. testing) and actually we spent less time; for other tasks we assigned less hours than needed and so we ended up with more spent time. These problems occurred because we didn't know each other capabilities and skills, so we cannot estimate the right time needed for each task.
 
 - What lessons did you learn (both positive and negative) in this sprint?
+We have to think of what we want to do and agree on some kind of data exchanged between frontend and backend, so basically a better planning before starting the actual work.
 
-- Which improvement goals set in the previous retrospective were you able to achieve? 
+- Which improvement goals set in the previous retrospective were you able to achieve?
+No one, this is the first retrospective.
   
 - Which ones you were not able to achieve? Why?
+No one, this is the first retrospective.
 
 - Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)
+The most important thing is a better communication between team members and a more tight team coordination. 
 
 > Propose one or two
 
 - One thing you are proud of as a Team!!
+Even though we had some problems in communication and coordination, we managed to complete most of the tasks respecting person hours limit.
