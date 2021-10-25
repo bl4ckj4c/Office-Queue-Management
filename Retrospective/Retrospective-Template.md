@@ -38,8 +38,8 @@ sections:
 > place technical tasks corresponding to story `#0` and leave out story points (not applicable in this case)
 
 - Hours per task (average, standard deviation)
-  - Average: 3 hours and 20 minutes
-  - Standard deviation: 2 hours and 48 minutes
+  - Average: 4 hours and 4 minutes
+  - Standard deviation: 3 hours and 40 minutes
 - Total task estimation error ratio: sum of total hours estimation / sum of total hours spent from previous table
   - 56 / 57 = 0.982
 
@@ -47,24 +47,24 @@ sections:
 ## QUALITY MEASURES 
 
 - Unit Testing:
-  - Total hours estimated
-  - Total hours spent
-  - Nr of automated unit test cases 
-  - Coverage (if available)
+  - Total hours estimated: 11 hours
+  - Total hours spent: 10 hours
+  - Nr of automated unit test cases: 5 hours
+  - Coverage (if available): not available
 - E2E testing:
-  - Total hours estimated
-  - Total hours spent
+  - Total hours estimated: 5 hours
+  - Total hours spent: 30 minutes
 - Code review 
-  - Total hours estimated 
-  - Total hours spent
+  - Total hours estimated: 5 hours
+  - Total hours spent: 4 hours and 30 minutes
 - Technical Debt management:
-  - Total hours estimated 
-  - Total hours spent
-  - Hours estimated for remediation by SonarQube
-  - Hours estimated for remediation by SonarQube only for the selected and planned issues 
-  - Hours spent on remediation 
-  - debt ratio (as reported by SonarQube under "Measures-Maintainability")
-  - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability )
+  - Total hours estimated: -
+  - Total hours spent: -
+  - Hours estimated for remediation by SonarQube: -
+  - Hours estimated for remediation by SonarQube only for the selected and planned issues: -
+  - Hours spent on remediation: -
+  - debt ratio (as reported by SonarQube under "Measures-Maintainability"): -
+  - rating for each quality characteristic reported in SonarQube under "Measures" (namely reliability, security, maintainability ): -
   
 
 
