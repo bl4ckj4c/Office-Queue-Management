@@ -12,9 +12,9 @@ sections:
 
 ### Macro statistics
 
-- Number of stories committed vs done 
-- Total points committed vs done 
-- Nr of hours planned vs spent (as a team)
+- Number of stories committed vs done: 3 committed and 3 done
+- Total points committed vs done: 18 committed and 16 done
+- Nr of hours planned vs spent (as a team): 56 hours planned and 57 hours spent
 
 **Remember**  a story is done ONLY if it fits the Definition of Done:
  
@@ -29,14 +29,19 @@ sections:
 
 | Story  | # Tasks | Points | Hours est. | Hours actual |
 |--------|---------|--------|------------|--------------|
-| _#0_   |         |    -   |            |              |
-| n      |         |        |            |              |
+| _#0_   |    5    |    -   |    23      |     13.5     |
+| S202101OQM-2 AS A Client I WANT TO select a service type SO THAT I can be served                          | 3 | 8 | 14 | 24.5 |
+| S202101OQM-7 AS A Manager I WANT TO know the number of customers each counter has served (day/week/month) | 4 | 8 | 16 | 15.5 |
+| S202101OQM-1 AS AN Officer I WANT TO notify that I am ready SO THAT I can serve the next client           | 2 | 2 | 4  | 3.5  |
    
 
 > place technical tasks corresponding to story `#0` and leave out story points (not applicable in this case)
 
 - Hours per task (average, standard deviation)
+  - Average: 3 hours and 20 minutes
+  - Standard deviation: 2 hours and 48 minutes
 - Total task estimation error ratio: sum of total hours estimation / sum of total hours spent from previous table
+  - 56 / 57 = 0.982
 
   
 ## QUALITY MEASURES 
